@@ -24,9 +24,9 @@ endif
 requirements: test_environment
 	pip install -r requirements.txt
 
-## Make Dataset
+## Make a Sample Dataset
 data: requirements
-	$(PYTHON_INTERPRETER) src/data/make_dataset.py
+	$(PYTHON_INTERPRETER) src/data/make_sample_jobsearch.py
 
 ## Delete all compiled Python files
 clean:
