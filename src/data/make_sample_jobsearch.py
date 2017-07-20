@@ -4,6 +4,8 @@ from dotenv import find_dotenv, load_dotenv
 import socket
 from indeed import IndeedClient
 
+# TODO: create viable sample dataset and export results to data folder
+
 # create the directory cursor
 project_dir = os.path.join(os.path.dirname(__file__), os.pardir, os.pardir)
 
@@ -18,7 +20,7 @@ _loc = "atlanta"
 client = IndeedClient(indeed_pub_id)
 
 # Script that pulls job search data using Indeed's api
-def job_search(extra_params):
+def job_search():
 
     params = {
         'q' : _query,
@@ -26,7 +28,6 @@ def job_search(extra_params):
         'userip' : get_ip(),
         'useragent' : user_agent
     }
-    params.update(extra_params)
     search_response = client.search(**params)
     return search_response
 

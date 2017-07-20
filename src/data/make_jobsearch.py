@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 import os
 from dotenv import find_dotenv, load_dotenv
 import socket
 from indeed import IndeedClient
+import re
 
-# Create the directory cursor to navigate directory
 project_dir = os.path.join(os.path.dirname(__file__), os.pardir, os.pardir)
 
 def get_ip():
@@ -19,7 +18,6 @@ static_params = {
     'useragent' : user_agent
 }
 
-# Set the indeed client
 client = IndeedClient(indeed_pub_id)
 
 # Script that pulls job search data using Indeed's api
