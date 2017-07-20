@@ -1,4 +1,4 @@
-project_name
+New Career Exploration - A Data Analysis Project
 ==============================
 
 A python-based data analysis project that explores trends for in-demand skills and job titles for a particular career path
