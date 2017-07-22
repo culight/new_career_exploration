@@ -4,6 +4,8 @@ def validate_results(results):
     valid_results = []
     for result in results:
         entry = {}
+        if result['expired'] == True:
+            continue
         if result['jobtitle']:
             entry['jobtitle'] = result['jobtitle']
         else:
