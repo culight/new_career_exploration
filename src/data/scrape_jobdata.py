@@ -1,23 +1,28 @@
 from bs4 import BeautifulSoup
-import urllib3
+import requests
 
 def get_html(url):
     request = None
-    try:
-        http = urllib3.PoolManager()
-        request = http.request("GET", url, timeout = 4.0, retries = 2)
-    except urllib3.exceptions.NewConnectionError:
-        print('Connection failed.')
-        return None
-    return request.data
+    request = requests.get(url)
+    if request.ok:
+        return request.text
+    else:
+        print(request.status_code)
 
 def scrape_html(html):
+    sections = {}
     soup = BeautifulSoup(html, "html.parser")
 
-    # job_content = soup.find(id="job-content")
-    # job_header = soup.find(id="job-header
-    job_summary = soup.find(id="job_summary")
-    for p in job_summary.find_all('p'):
-        print(p)
-        print("--------------------")
-    return job_summary
+    job_header = soup.find(id="jobHeader")
+    job_summary = soup.find('span', attrs={"id":"job_summary"})
+
+    print(job_header)
+
+    if job_summary and len(job_summary) > 1:
+            sections['header'] = job_header
+            sections['summary'] = job_summary
+    else:
+        return None
+    #job_content = soup.find(id="job-content") -- not sure if I want this
+
+    return sections
