@@ -10,19 +10,14 @@ def get_html(url):
         print(request.status_code)
 
 def scrape_html(html):
-    sections = {}
+    sections = {'header':'', 'content':''}
     soup = BeautifulSoup(html, "html.parser")
 
-    job_header = soup.find(id="jobHeader")
-    job_summary = soup.find('span', attrs={"id":"job_summary"})
+    job_header = soup.find('div', attrs={"data-tn-component":"jobHeader"})
+    job_content = soup.find('span', attrs={"id":"job_summary"})
 
-    print(job_header)
-
-    if job_summary and len(job_summary) > 1:
+    if job_content and len(job_content) > 1:
             sections['header'] = job_header
-            sections['summary'] = job_summary
-    else:
-        return None
-    #job_content = soup.find(id="job-content") -- not sure if I want this
+            sections['content'] = job_content
 
     return sections
